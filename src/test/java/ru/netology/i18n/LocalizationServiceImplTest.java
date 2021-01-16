@@ -16,7 +16,20 @@ class LocalizationServiceImplTest {
         //when
         LocalizationServiceImpl localizationService = new LocalizationServiceImpl();
         String realMessage = localizationService.locale(countryArgument);
+       //then
         Assertions.assertEquals(expected, realMessage);
 
+    }
+
+    @Test
+    void testLocale() {
+        //given
+        final Country countryArgument = Country.USA;
+        final  String expected = "Welcome";
+        //when
+        LocalizationServiceImpl localizationService = new LocalizationServiceImpl();
+        String realMessage = localizationService.locale(countryArgument);
+        //then
+        Assertions.assertEquals(expected, realMessage);
     }
 }

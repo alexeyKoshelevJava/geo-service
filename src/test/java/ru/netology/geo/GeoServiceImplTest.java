@@ -25,4 +25,56 @@ class GeoServiceImplTest {
 
     }
 
+    @Test
+    void testByIp() {
+        //given
+        final String argument = "127.0.0.1";
+        final Location expectedLocation = new Location(null, null, null, 0);
+
+        GeoServiceImpl geoService = new GeoServiceImpl();
+//when
+        Location realLocation = geoService.byIp(argument);
+        //then
+        Assertions.assertEquals(expectedLocation, realLocation);
+
+    }
+
+    @Test
+    void testByIp1() {
+        //given
+        final String argument = "172.0.32.11";
+        final Location expectedLocation = new Location("Moscow", Country.RUSSIA, "Lenina", 15);
+
+        GeoServiceImpl geoService = new GeoServiceImpl();
+//when
+        Location realLocation = geoService.byIp(argument);
+        //then
+        Assertions.assertEquals(expectedLocation, realLocation);
+    }
+
+    @Test
+    void testByIp2() {
+        //given
+        final String argument = "172.0.00.00";
+        final Location expectedLocation = new Location("Moscow", Country.RUSSIA, null, 0);
+
+        GeoServiceImpl geoService = new GeoServiceImpl();
+//when
+        Location realLocation = geoService.byIp(argument);
+        //then
+        Assertions.assertEquals(expectedLocation, realLocation);
+    }
+
+    @Test
+    void testByIp3() {
+        //given
+        final String argument = "96.00.000.001";
+        final Location expectedLocation = new Location("New York", Country.USA, null,  0);
+
+        GeoServiceImpl geoService = new GeoServiceImpl();
+//when
+        Location realLocation = geoService.byIp(argument);
+        //then
+        Assertions.assertEquals(expectedLocation, realLocation);
+    }
 }
